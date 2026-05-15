@@ -9,17 +9,32 @@ const Hero = () => {
     }
   };
 
-  const handleDownloadAndView = (e) => {
+  const handleDownloadAndView = async (e) => {
     e.preventDefault();
-
-    window.open('/SAIF-ULLAH-Resume.pdf', '_blank');
-   
-    const link = document.createElement('a');
-    link.href = '/SAIF-ULLAH-Resume.pdf';
-    link.download = 'SAIF-ULLAH-Resume.pdf';
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
+    
+    try {
+      // Fetch the PDF file
+      const response = await fetch('/Saif_Ullah_CV.pdf');
+      const blob = await response.blob();
+      
+      // Create a blob URL
+      const blobUrl = window.URL.createObjectURL(blob);
+      
+      // Create a temporary link and trigger download
+      const link = document.createElement('a');
+      link.href = blobUrl;
+      link.download = 'Saif_Ullah_CV.pdf';
+      document.body.appendChild(link);
+      link.click();
+      
+      // Clean up
+      document.body.removeChild(link);
+      window.URL.revokeObjectURL(blobUrl);
+    } catch (error) {
+      console.error('Error downloading PDF:', error);
+      // Fallback to direct link
+      window.open('/Saif_Ullah_CV.pdf', '_blank');
+    }
   };
 
   return (
@@ -65,14 +80,13 @@ const Hero = () => {
             >
               View My Work
             </Button>
-            <a
-              href="/SAIF-ULLAH-Resume.pdf"
+            <button
               onClick={handleDownloadAndView}
               className="inline-flex items-center justify-center border border-border bg-transparent hover:bg-accent hover:text-white transition-all duration-300 font-medium px-8 py-3 rounded-md text-base cursor-pointer"
             >
               <Download className="mr-2 h-4 w-4" />
               Download Resume
-            </a>
+            </button>
           </div>
 
           {/* Social Links */}

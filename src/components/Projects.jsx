@@ -6,13 +6,32 @@ import { Badge } from '@/components/ui/badge';
 const Projects = () => {
   const projects = [
     {
+      title: "ClassSphere VR",
+      description: "Developed an immersive VR-based virtual classroom integrating Flutter mobile app with Unity (VR/XR), featuring AI-driven virtual lectures and real-time interaction with custom-designed VR environments and avatars.",
+      image: "/a.jpeg",
+      mobileImage: "/mobile.png",
+      technologies: ["Flutter", "Unity", "Node.js", "MongoDB", "Blender", "REST APIs"],
+      liveUrl: "#",
+      githubUrl: "#",
+      featured: true
+    },
+    {
+      title: "Sports ERP System",
+      description: "Built a comprehensive full-stack ERP system for sports equipment manufacturing with role-based dashboards for 6 departments, featuring automated order routing, real-time inventory alerts, and smart order processing with auto-generated production orders.",
+      image: "/sports.png",
+      technologies: ["Python", "Django", "MySQL", "React", "Bootstrap 5", "Chart.js", "REST APIs"],
+      liveUrl: "#",
+      githubUrl: "#",
+      featured: true
+    },
+    {
       title: "MechConnect",
       description: "Developed a Full stack web platform connecting car owners with mechanics/electricians for emergency repairs, schedule appointments, and track vehicle history.",
       image: "/MechConnect.png",
       technologies: ["HTML5", "CSS3", "JavaScript",  "PHP", "MySQL"],
       liveUrl: "#",
       githubUrl: "https://github.com/Saifullah-Zakaib/MechConnect",
-      featured: true
+      featured: false
     },
     {
       title: "FitFocus",
@@ -21,7 +40,7 @@ const Projects = () => {
       technologies: ["HTML5", "CSS3", "JavaScript", "Django", "SQLite"],
       liveUrl: "#",
       githubUrl: "https://github.com/Saifullah-Zakaib/FitFocus",
-      featured: true
+      featured: false
     },
     {
       title: "CV Checker",
@@ -77,22 +96,58 @@ const Projects = () => {
               <div key={index} className={`grid grid-cols-1 lg:grid-cols-2 gap-12 items-center ${index % 2 === 1 ? 'lg:grid-flow-col-dense' : ''}`}>
                 {/* Project Image */}
                 <div className={`relative group ${index % 2 === 1 ? 'lg:col-start-2' : ''}`}>
-                  <div className="relative overflow-hidden rounded-2xl shadow-large">
-                    <img 
-                      src={project.image}
-                      alt={project.title}
-                      className="w-full h-80 object-cover transition-transform duration-500 group-hover:scale-105"
-                    />
-                    <div className="absolute inset-0 bg-primary/10 group-hover:bg-primary/20 transition-colors duration-300"></div>
-                  </div>
+                  {project.mobileImage ? (
+                    // ClassSphere VR with dual images
+                    <div className="flex gap-6 items-center justify-center">
+                      {/* Desktop/VR View */}
+                      <div className="relative overflow-hidden rounded-2xl shadow-large flex-1">
+                        <img 
+                          src={project.image}
+                          alt={`${project.title} VR View`}
+                          className="w-full h-80 object-cover transition-transform duration-500 group-hover:scale-105"
+                        />
+                        <div className="absolute inset-0 bg-primary/10 group-hover:bg-primary/20 transition-colors duration-300"></div>
+                      </div>
+                      {/* Mobile App View */}
+                      <div className="relative flex-shrink-0">
+                        <div className="relative w-48 h-96 bg-gray-900 rounded-[2.5rem] p-3 shadow-2xl border-8 border-gray-800">
+                          <div className="absolute top-0 left-1/2 transform -translate-x-1/2 w-20 h-6 bg-gray-800 rounded-b-2xl"></div>
+                          <div className="w-full h-full bg-white rounded-[1.5rem] overflow-hidden">
+                            <img 
+                              src={project.mobileImage}
+                              alt={`${project.title} Mobile App`}
+                              className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                            />
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  ) : (
+                    // Regular single image
+                    <div className="relative overflow-hidden rounded-2xl shadow-large">
+                      <img 
+                        src={project.image}
+                        alt={project.title}
+                        className="w-full h-80 object-cover transition-transform duration-500 group-hover:scale-105"
+                      />
+                      <div className="absolute inset-0 bg-primary/10 group-hover:bg-primary/20 transition-colors duration-300"></div>
+                    </div>
+                  )}
                 </div>
 
                 {/* Project Content */}
                 <div className={`space-y-6 ${index % 2 === 1 ? 'lg:col-start-1 lg:row-start-1' : ''}`}>
                   <div>
-                    <h3 className="font-poppins font-bold text-2xl md:text-3xl text-foreground mb-4">
-                      {project.title}
-                    </h3>
+                    <div className="flex items-center gap-3 mb-2">
+                      <h3 className="font-poppins font-bold text-2xl md:text-3xl text-foreground">
+                        {project.title}
+                      </h3>
+                      {project.isFinalYear && (
+                        <Badge className="bg-primary text-white hover:bg-primary/90">
+                          Final Year Project
+                        </Badge>
+                      )}
+                    </div>
                     <p className="text-lg text-muted-foreground leading-relaxed">
                       {project.description}
                     </p>
@@ -109,15 +164,17 @@ const Projects = () => {
 
                   {/* Project Links */}
                   <div className="flex gap-4">
-                    <a
-                      href={project.githubUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="inline-flex items-center border border-border rounded-md px-4 py-2 text-base font-medium hover:bg-accent hover:text-white transition-all duration-300"
-                    >
-                      <Github className="mr-2 h-4 w-4" />
-                      Code
-                    </a>
+                    {project.githubUrl && project.githubUrl !== "#" && (
+                      <a
+                        href={project.githubUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center border border-border rounded-md px-4 py-2 text-base font-medium hover:bg-accent hover:text-white transition-all duration-300"
+                      >
+                        <Github className="mr-2 h-4 w-4" />
+                        Code
+                      </a>
+                    )}
                   </div>
                 </div>
               </div>
