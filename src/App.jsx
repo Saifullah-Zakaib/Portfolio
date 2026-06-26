@@ -195,10 +195,10 @@ function About() {
         </div>
         <div className="md:col-span-8 space-y-8">
           <p className="text-2xl md:text-3xl font-display font-light leading-[1.3] text-foreground">
-            A passionate Software Engineering student driven by <span className="italic">curiosity</span> and{" "}
-            <span className="italic">creativity</span> — building scalable, modern applications across web and mobile.
+            A Software Engineering <span className="italic">graduate</span> driven by{" "}
+            <span className="italic">curiosity</span> and <span className="italic">creativity</span> — building scalable, production-ready applications across web and mobile.
           </p>
-          <p className="text-muted-foreground leading-relaxed text-base max-w-2xl">{portfolio.about.p1}</p>
+          <p className="text-muted-foreground leading-relaxed text-base max-w-2xl">I specialize in full-stack web development and mobile app development, with hands-on experience shipping real products. From a SaaS freelancer portal with Stripe payments to a national mental health platform affiliated with Harvard Medical School, I build things that actually work and matter.</p>
           <p className="text-muted-foreground leading-relaxed text-base max-w-2xl">{portfolio.about.p2}</p>
 
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-px bg-hairline border border-hairline mt-14">
